@@ -1,7 +1,7 @@
 import React from 'react'
 import { render } from 'react-dom'
 
-import './css/index.css';
+import './css/styles.css';
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap/dist/css/bootstrap-theme.css'
 import './css/bootstrap.paper-theme.min.css'
