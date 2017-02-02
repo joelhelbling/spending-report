@@ -4,6 +4,7 @@ import App from './components/App';
 import './css/index.css';
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap/dist/css/bootstrap-theme.css'
+import './css/bootstrap.paper-theme.min.css'
 
 ReactDOM.render(
   <App />,
