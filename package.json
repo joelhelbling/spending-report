@@ -4,12 +4,16 @@
   "private": true,
   "devDependencies": {
     "autoprefixer-stylus": "^0.13.0",
+    "chai": "^3.5.0",
     "concurrently": "^3.1.0",
+    "enzyme": "^2.7.1",
+    "react-addons-test-utils": "^15.4.2",
     "react-scripts": "0.8.5",
     "stylus": "^0.54.5"
   },
   "dependencies": {
     "bootstrap": "^3.3.7",
+    "humanize-number": "0.0.2",
     "react": "^15.4.2",
     "react-bootstrap": "^0.30.7",
     "react-dom": "^15.4.2",
