@@ -3,25 +3,9 @@ import { syncHistoryWithStore } from 'react-router-redux'
 import { browserHistory } from 'react-router'
 
 import rootReducer from './reducers/index'
+import data from './data'
 
-const defaultState = {
-  reports: {
-    foo: {
-      title: 'Four Winds Eclectic',
-      created_at: Date.now(),
-      updated_at: Date.now(),
-      status: 'open',
-      comment: 'A report',
-    },
-    bar: {
-      title: 'Wonderful putty --try it!',
-      created_at: Date.now(),
-      updated_at: Date.now(),
-      status: 'closed',
-      comment: 'A bicycle and a truck went on a date.'
-    }
-  }
-}
+const defaultState = data
 
 const enhancers = compose(
   window.devToolsExtension ? window.devToolsExtension() : f => f
