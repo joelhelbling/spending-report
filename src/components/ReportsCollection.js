@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { ListGroup } from 'react-bootstrap'
 import ReportSummary from './ReportSummary'
 
 class ReportsCollection extends Component {
@@ -7,11 +8,11 @@ class ReportsCollection extends Component {
     const keys = Object.keys(reports)
 
     return (
-      <div className="list-group">
+      <ListGroup>
         {
           keys.map((key) => <ReportSummary report={reports[key]} key={key} reportId={key} />)
         }
-      </div>
+      </ListGroup>
     )
   }
 }

@@ -1,8 +1,29 @@
 import React from 'react'
 import { Link } from 'react-router'
 import { ListGroup, ListGroupItem, Button } from 'react-bootstrap'
+import LineItem from './LineItem'
 
 class Report extends React.Component {
+
+  lineItems = (reportId) => {
+    const report = this.props.reports[reportId]
+    console.log(JSON.stringify(report.lineItems, null, 2))
+    if (report.lineItems.length > 0) {
+      return report.lineItems.map((lineItem, i) => {
+        <LineItem
+          lineItem={lineItem}
+          key={`${reportId}-lineItem-${i}`}
+        />
+      })
+    } else {
+      return (
+        <ListGroupItem className="clearfix">
+          <em>There are no items in this report.  Add items below.</em>
+        </ListGroupItem>
+      )
+    }
+  }
+
   render() {
     const {reports, params} = this.props
     const reportId = params.reportId
@@ -10,36 +31,34 @@ class Report extends React.Component {
 
     return (
       <div>
-        <span className="label label-warning pull-right">{report.status}</span>
         <h2 className="clearfix">
+          <span className="label label-warning pull-right">{report.status}</span>
           <span className="glyphicon glyphicon-list-alt"></span>
           &nbsp; {report.title}
         </h2>
         <p>
           {report.comment}
-          <Button bsStyle="info" className="btn-xs edit-report-button">
+          <Button bsStyle="primary" className="btn-xs edit-report-button" disabled={true}>
             <span className="glyphicon glyphicon-pencil"></span>
           </Button>
-          <Button bsStyle="danger" className="btn-xs confirmed-delete">
+          <Button bsStyle="danger" className="btn-xs confirmed-delete" disabled={true}>
             <span className="glyphicon glyphicon-trash"></span>
           </Button>
         </p>
         <ListGroup>
           <ListGroupItem bsStyle="info" className="clearfix">
-            <Button bsStyle="success" className="pull-right">
+            <Button bsStyle="success" className="pull-right" disabled={true}>
               <span className="glyphicon glyphicon-cloud-upload"></span>
               &nbsp; Close and send this report
             </Button>
-            <h4>Line Items</h4>
+            <h4 className="clearfix">Line Items</h4>
             <div className="col-sm-1">&nbsp;</div>
             <div className="li-header col-sm-5 text-left">Description</div>
             <div className="li-header col-sm-2 text-right">Unit cost</div>
             <div className="li-header col-sm-1">Quantity</div>
-            <div className="li-header col-sm-2">Total</div>
+            <div className="li-header col-sm-2 text-right">Total</div>
           </ListGroupItem>
-          <ListGroupItem className="clearfix">
-            <em>There are no items in this report.  Add items below.</em>
-          </ListGroupItem>
+          { report.lineItems.map((lineItem, i) => <LineItem lineItem={lineItem} key={i} id={i} />) }
           <ListGroupItem bsStyle="info" className="clearfix">
             <div className="col-sm-8">&nbsp;</div>
             <div className="col-sm-1 text-right">
