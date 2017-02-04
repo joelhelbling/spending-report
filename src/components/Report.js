@@ -1,10 +1,16 @@
 import React from 'react'
 import { Link } from 'react-router'
 import { ListGroup, ListGroupItem, Button } from 'react-bootstrap'
+import humanize from 'humanize-number'
 import LineItem from './LineItem'
 import NewLineItem from './NewLineItem'
 
 class Report extends React.Component {
+  reportTotal = (lineItems) => {
+    return lineItems.reduce((accumulator, li) => {
+      return accumulator + li.unitCost*li.quantity
+    }, 0)
+  }
 
   render() {
     const { reports, lineItems, params } = this.props
@@ -49,7 +55,9 @@ class Report extends React.Component {
             <div className="col-sm-1 text-right">
               <strong>Total:</strong>
             </div>
-            <div className="col-sm-2 text-right">Le 100,000</div>
+            <div className="col-sm-2 text-right report-total">
+              Le { humanize(this.reportTotal(lineItems[reportId])) }
+            </div>
           </ListGroupItem>
         </ListGroup>
         <Link to="/reports" className="pull-left">
