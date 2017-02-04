@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { FormGroup, Button } from 'react-bootstrap'
 
-class NewLineItem extends Component {
+class LineItemForm extends Component {
   handleSubmit = (e) => {
     e.preventDefault()
     const { reportId } = this.props.params
@@ -9,7 +9,7 @@ class NewLineItem extends Component {
     const description = descriptionInput.value
     const [ unitCost, quantity ] =
       [ unitCostInput, quantityInput ]
-        .map((input) => Number.parseFloat(input.value, 10))
+        .map((input) => Number.parseFloat(input.value || 1, 10))
 
     this.props.addLineItem(reportId, {
       description,
@@ -17,13 +17,14 @@ class NewLineItem extends Component {
       quantity,
     })
 
-    this.refs.lineItemForm.reset()
+    this.refs.form.reset()
+    this.refs.descriptionInput.focus()
   }
 
   render() {
     const { description, unitCost, quantity } = this.props
     return (
-      <form ref="lineItemForm" className="line-item-form" onSubmit={this.handleSubmit}>
+      <form ref="form" className="line-item-form" onSubmit={this.handleSubmit}>
         <FormGroup className="line-item-form">
           <div className="input-group col-sm-6 pull-left">
             <input
@@ -52,7 +53,7 @@ class NewLineItem extends Component {
               <input
                 ref="quantityInput"
                 defaultValue={quantity}
-                placeholder="0"
+                placeholder="1"
                 type="text"
                 className="form-control"
               />
@@ -63,7 +64,7 @@ class NewLineItem extends Component {
             <Button
               disabled={false}
               bsStyle="default"
-              className="edit-report-button"
+              className="add-line-item"
               onClick={this.handleSubmit}
             >
               <span className="glyphicon glyphicon-plus-sign"></span>
@@ -76,4 +77,4 @@ class NewLineItem extends Component {
   }
 }
 
-export default NewLineItem
+export default LineItemForm

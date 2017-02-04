@@ -1,13 +1,15 @@
 import React from 'react'
-import { shallow, mount } from 'enzyme'
+import { mount } from 'enzyme'
 import { expect } from 'chai'
 import LineItem from './LineItem'
 import td from 'testdouble'
 
 describe('LineItem', () => {
-  let [component, reportId, key, lineItem] = [];
+  let [component, reportId, key, lineItem, removeLineItem, addLineItem ] = [];
 
   beforeEach(() => {
+    removeLineItem = td.function('removeLineItem')
+
     reportId = "ABC123"
     key = 1
     lineItem = {
@@ -15,14 +17,18 @@ describe('LineItem', () => {
       unitCost: 10000,
       quantity: 3,
     }
+    component = mount(
+      <LineItem
+        lineItem={lineItem}
+        key={key}
+        id={key}
+        params={{reportId}}
+        removeLineItem={removeLineItem}
+      />
+    )
   })
 
   describe('displays', () => {
-    beforeEach(() => {
-      component = shallow(
-        <LineItem lineItem={lineItem} key={key} id={key} />
-      )
-    })
     test('description', () => {
       expect(component.find('.li-description').text())
         .to.contain('chick peas')
@@ -41,25 +47,16 @@ describe('LineItem', () => {
     })
   })
 
-  describe('deletes', () => {
-    let [ removeLineItem ] = []
-
-    beforeEach(() => {
-      removeLineItem = td.function('removeLineItem')
-      component = mount(
-        <LineItem
-          lineItem={lineItem}
-          key={key}
-          id={key}
-          params={{reportId}}
-          removeLineItem={removeLineItem}
-        />
-      )
-    })
-
+  describe('delete button', () => {
     it('fires the removeLineItem action', () => {
-      component.find('button.btn-danger').simulate('click')
+      component.find('button.remove').simulate('click')
       td.verify(removeLineItem(reportId, key))
+    })
+  })
+
+  describe('edit button', () => {
+    it('fires the editLineItem action', () => {
+      component.find('button.edit')
     })
   })
 })

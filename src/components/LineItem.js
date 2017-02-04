@@ -3,7 +3,13 @@ import { ListGroupItem, ButtonGroup, Button } from 'react-bootstrap'
 import humanize from 'humanize-number'
 
 class LineItem extends Component {
-  handleDelete = (e) => {
+  handleEdit = (e) => {
+    e.preventDefault()
+    const id = this.props.id
+    const reportId = this.props.params.reportId
+    this.props.editLineItem(reportId, id)
+  }
+  handleRemove = (e) => {
     e.preventDefault()
     const id = this.props.id
     const reportId = this.props.params.reportId
@@ -16,10 +22,10 @@ class LineItem extends Component {
       <ListGroupItem className="clearfix">
         <div className="col-sm-1 line-item-controls">
           <ButtonGroup>
-            <Button bsStyle="info" className="btn-xs" disabled={true}>
+            <Button bsStyle="info" className="btn-xs edit" disabled={true}>
               <span className="glyphicon glyphicon-pencil"></span>
             </Button>
-            <Button bsStyle="danger" className="btn-xs" onClick={this.handleDelete}>
+            <Button bsStyle="danger" className="btn-xs remove" onClick={this.handleRemove}>
               <span className="glyphicon glyphicon-trash"></span>
             </Button>
           </ButtonGroup>

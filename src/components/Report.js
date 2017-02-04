@@ -3,7 +3,7 @@ import { Link } from 'react-router'
 import { ListGroup, ListGroupItem, Button } from 'react-bootstrap'
 import humanize from 'humanize-number'
 import LineItem from './LineItem'
-import NewLineItem from './NewLineItem'
+import LineItemForm from './LineItemForm'
 
 class Report extends React.Component {
   reportTotal = (lineItems) => {
@@ -48,7 +48,7 @@ class Report extends React.Component {
           </ListGroupItem>
           { (lineItems[reportId] || []).map((lineItem, i) => <LineItem lineItem={lineItem} key={i} id={i} {...this.props} />) }
           <ListGroupItem bsStyle="warning" className="clearfix">
-            <NewLineItem {...this.props} />
+            <LineItemForm {...this.props} />
           </ListGroupItem>
           <ListGroupItem bsStyle="info" className="clearfix">
             <div className="col-sm-8">&nbsp;</div>
