@@ -2,32 +2,14 @@ import React from 'react'
 import { Link } from 'react-router'
 import { ListGroup, ListGroupItem, Button } from 'react-bootstrap'
 import LineItem from './LineItem'
+import NewLineItem from './NewLineItem'
 
 class Report extends React.Component {
 
-  lineItems = (reportId) => {
-    const report = this.props.reports[reportId]
-    console.log(JSON.stringify(report.lineItems, null, 2))
-    if (report.lineItems.length > 0) {
-      return report.lineItems.map((lineItem, i) => {
-        <LineItem
-          lineItem={lineItem}
-          key={`${reportId}-lineItem-${i}`}
-        />
-      })
-    } else {
-      return (
-        <ListGroupItem className="clearfix">
-          <em>There are no items in this report.  Add items below.</em>
-        </ListGroupItem>
-      )
-    }
-  }
-
   render() {
-    const {reports, params} = this.props
+    const { reports, lineItems, params } = this.props
     const reportId = params.reportId
-    const report = reports[reportId]
+    const report = reports.filter((report) => report.id === reportId)[0]
 
     return (
       <div>
@@ -58,16 +40,16 @@ class Report extends React.Component {
             <div className="li-header col-sm-1">Quantity</div>
             <div className="li-header col-sm-2 text-right">Total</div>
           </ListGroupItem>
-          { report.lineItems.map((lineItem, i) => <LineItem lineItem={lineItem} key={i} id={i} />) }
+          { (lineItems[reportId] || []).map((lineItem, i) => <LineItem lineItem={lineItem} key={i} id={i} />) }
+          <ListGroupItem bsStyle="warning" className="clearfix">
+            <NewLineItem {...this.props} />
+          </ListGroupItem>
           <ListGroupItem bsStyle="info" className="clearfix">
             <div className="col-sm-8">&nbsp;</div>
             <div className="col-sm-1 text-right">
               <strong>Total:</strong>
             </div>
             <div className="col-sm-2 text-right">Le 100,000</div>
-          </ListGroupItem>
-          <ListGroupItem bsStyle="warning" className="clearfix">
-            List Item Form
           </ListGroupItem>
         </ListGroup>
         <Link to="/reports" className="pull-left">

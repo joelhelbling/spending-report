@@ -5,7 +5,8 @@ import Main from './Main'
 
 function mapStateToProps(state) {
   return {
-    reports: state.reports
+    reports: state.reports,
+    lineItems: state.lineItems,
   }
 }
 

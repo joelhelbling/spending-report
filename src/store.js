@@ -3,9 +3,13 @@ import { syncHistoryWithStore } from 'react-router-redux'
 import { browserHistory } from 'react-router'
 
 import rootReducer from './reducers/index'
-import data from './data'
+import reports from './data/reports'
+import lineItems from './data/lineItems'
 
-const defaultState = data
+const defaultState = {
+  reports,
+  lineItems,
+}
 
 const enhancers = compose(
   window.devToolsExtension ? window.devToolsExtension() : f => f

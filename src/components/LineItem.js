@@ -4,7 +4,6 @@ import humanize from 'humanize-number'
 
 class LineItem extends Component {
   render() {
-    console.log(JSON.stringify(this.props, null, 2))
     const { description, unitCost, quantity } = this.props.lineItem
     return (
       <ListGroupItem className="clearfix">

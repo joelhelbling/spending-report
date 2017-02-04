@@ -4,3 +4,11 @@ export function addReport(report) {
     report
   }
 }
+
+export function addLineItem(reportId, lineItem) {
+  return {
+    type: 'ADD_LINE_ITEM',
+    reportId,
+    lineItem
+  }
+}

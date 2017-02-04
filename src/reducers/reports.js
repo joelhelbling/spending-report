@@ -1,4 +1,4 @@
-function reports(state = [], action) {
+function reports(state = {}, action) {
   return state
 }
 
