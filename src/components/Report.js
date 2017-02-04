@@ -46,7 +46,7 @@ class Report extends React.Component {
             <div className="li-header col-sm-1">Quantity</div>
             <div className="li-header col-sm-2 text-right">Total</div>
           </ListGroupItem>
-          { (lineItems[reportId] || []).map((lineItem, i) => <LineItem lineItem={lineItem} key={i} id={i} />) }
+          { (lineItems[reportId] || []).map((lineItem, i) => <LineItem lineItem={lineItem} key={i} id={i} {...this.props} />) }
           <ListGroupItem bsStyle="warning" className="clearfix">
             <NewLineItem {...this.props} />
           </ListGroupItem>

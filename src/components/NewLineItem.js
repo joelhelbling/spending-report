@@ -62,7 +62,7 @@ class NewLineItem extends Component {
             <input type="submit" hidden />
             <Button
               disabled={false}
-              bsStyle="primary"
+              bsStyle="default"
               className="edit-report-button"
               onClick={this.handleSubmit}
             >
