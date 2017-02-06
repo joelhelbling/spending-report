@@ -14,8 +14,14 @@ function lineItems(state = {}, action) {
       delete(newState[action.reportId][action.lineItemId])
 
       return newState
+    case 'UPDATE_LINE_ITEM' :
+      newState = {...state}
+
+      newState[action.reportId][action.lineItemId] = action.lineItem
+
+      return newState
     default:
-      return state;
+      return state
   }
 }
 

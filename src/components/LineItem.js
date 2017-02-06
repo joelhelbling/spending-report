@@ -9,6 +9,7 @@ class LineItem extends Component {
     const reportId = this.props.params.reportId
     this.props.editLineItem(reportId, id)
   }
+
   handleRemove = (e) => {
     e.preventDefault()
     const id = this.props.id
@@ -22,7 +23,7 @@ class LineItem extends Component {
       <ListGroupItem className="clearfix">
         <div className="col-sm-1 line-item-controls">
           <ButtonGroup>
-            <Button bsStyle="info" className="btn-xs edit" disabled={true}>
+            <Button bsStyle="info" className="btn-xs edit" onClick={this.handleEdit}>
               <span className="glyphicon glyphicon-pencil"></span>
             </Button>
             <Button bsStyle="danger" className="btn-xs remove" onClick={this.handleRemove}>

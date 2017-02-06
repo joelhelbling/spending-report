@@ -11,7 +11,6 @@ describe('Report', () => {
 
   beforeEach(() => {
     params = { reportId: 'foo' }
-    console.log(reports)
     expectedReport = reports.filter((report) => report.id === 'foo')[0]
     expectedLineItems = lineItems.foo
 

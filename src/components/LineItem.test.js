@@ -5,10 +5,12 @@ import LineItem from './LineItem'
 import td from 'testdouble'
 
 describe('LineItem', () => {
-  let [component, reportId, key, lineItem, removeLineItem, addLineItem ] = [];
+  let [component, reportId, key, lineItem,
+    removeLineItem, addLineItem, editLineItem ] = [];
 
   beforeEach(() => {
     removeLineItem = td.function('removeLineItem')
+    editLineItem = td.function('editLineItem')
 
     reportId = "ABC123"
     key = 1
@@ -24,6 +26,7 @@ describe('LineItem', () => {
         id={key}
         params={{reportId}}
         removeLineItem={removeLineItem}
+        editLineItem={editLineItem}
       />
     )
   })
@@ -56,7 +59,8 @@ describe('LineItem', () => {
 
   describe('edit button', () => {
     it('fires the editLineItem action', () => {
-      component.find('button.edit')
+      component.find('button.edit').simulate('click')
+      td.verify(editLineItem(reportId, key))
     })
   })
 })

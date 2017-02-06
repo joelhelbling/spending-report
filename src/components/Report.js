@@ -6,6 +6,26 @@ import LineItem from './LineItem'
 import LineItemForm from './LineItemForm'
 
 class Report extends React.Component {
+  renderLineItem = (report, lineItem, index) => {
+    if (report._editing === index) {
+      return (
+        <LineItemForm lineItem={lineItem} key={index} id={index} {...this.props} />
+      )
+    } else {
+      return (
+        <LineItem lineItem={lineItem} key={index} id={index} {...this.props} />
+      )
+    }
+  }
+
+  renderAddLineItemForm = (isEditing) => {
+    if (isEditing) {
+      return (
+        <LineItemForm {...this.props} />
+      )
+    }
+  }
+
   reportTotal = (lineItems) => {
     return lineItems.reduce((accumulator, li) => {
       return accumulator + li.unitCost*li.quantity
@@ -46,10 +66,8 @@ class Report extends React.Component {
             <div className="li-header col-sm-1">Quantity</div>
             <div className="li-header col-sm-2 text-right">Total</div>
           </ListGroupItem>
-          { (lineItems[reportId] || []).map((lineItem, i) => <LineItem lineItem={lineItem} key={i} id={i} {...this.props} />) }
-          <ListGroupItem bsStyle="warning" className="clearfix">
-            <LineItemForm {...this.props} />
-          </ListGroupItem>
+          { (lineItems[reportId] || []).map((lineItem, i) => this.renderLineItem(report, lineItem, i)) }
+          { this.renderAddLineItemForm(typeof(report._editing) === 'undefined') }
           <ListGroupItem bsStyle="info" className="clearfix">
             <div className="col-sm-8">&nbsp;</div>
             <div className="col-sm-1 text-right">

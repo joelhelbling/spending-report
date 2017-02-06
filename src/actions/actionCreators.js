@@ -20,3 +20,20 @@ export function removeLineItem(reportId, lineItemId) {
     lineItemId
   }
 }
+
+export function editLineItem(reportId, lineItemId) {
+  return {
+    type: 'EDIT_LINE_ITEM',
+    reportId,
+    lineItemId
+  }
+}
+
+export function updateLineItem(reportId, lineItemId, lineItem) {
+  return {
+    type: 'UPDATE_LINE_ITEM',
+    reportId,
+    lineItemId,
+    lineItem
+  }
+}
